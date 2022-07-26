@@ -1,0 +1,26 @@
+version: "3.7"
+
+services:
+  config:
+    container_name: config
+    image: 981977116681.dkr.ecr.us-east-1.amazonaws.com/atom:latest
+    command: /appserver static --port=8000 -m /:/config
+    ports:
+      - "8000:8000"
+    volumes:
+        - type: bind
+          source: config
+          target: /config
+
+  wordgames:
+    container_name: wordgames
+    build:
+      context: .
+      dockerfile: Dockerfile.app.prod
+    command: /appserver -c app.json -c corpora.json
+    ports:
+      - "6001:6001"
+    environment:
+      APP_ENV_ROOT_URL: http://config:8000
+    depends_on:
+      - "config"

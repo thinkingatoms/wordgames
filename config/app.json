@@ -1,0 +1,19 @@
+{
+  "name": "WORDGAMES",
+  "port": 6001,
+  "secret": "%(env:APP_SECRET)%",
+  "public": "%(env:APP_PUBLIC_URL)%",
+  "cache": {
+    "long_expiry": 86400,
+    "medium_expiry": 3600,
+    "short_expiry": 15,
+    "clean_interval": 60,
+    "short_size": 1000,
+    "medium_size": 10000,
+    "long_size": 10000,
+    "forever_size": 1000
+  },
+  "games": {
+    "words": "%(words)%"
+  }
+}
